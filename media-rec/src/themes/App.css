@@ -1,0 +1,6 @@
+/*
+	Default font for this app. Please use this at all times expect for some exceptions
+	Regular (400) is default weight. Use font-weight: 500 or 700 for medium or bold font weights.
+	See AppTheme.js for implementation
+*/
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
