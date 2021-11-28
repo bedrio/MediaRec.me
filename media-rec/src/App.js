@@ -2,6 +2,11 @@ import './themes/App.css';
 import {theme} from "./themes/AppTheme";
 import {ThemeProvider, Typography} from "@material-ui/core";
 import MediaCard from "./components/MediaCard"
+import Friends from "./pages/Friends";
+import Home from "./pages/Home";
+import Notifications from "./pages/Notifications";
+import Nav from './components/Nav';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
 	let name = "Hero Academy"
@@ -23,7 +28,7 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<Typography variant="h1" color="primary" light="true">Hello past Ninad, how are you?</Typography>
-			<MediaCard
+			{/* <MediaCard
 				name={name}
 				summary={summary}
 				tags={tags}
@@ -31,7 +36,15 @@ function App() {
 				recReview={recReview}
 				recRating={recRating}
 				comRating={comRating}
-			/>
+			/> */}
+			<Router>
+				<Nav />
+				<Routes>
+					<Route path="/" element={<Home />}/>
+					<Route path="/friends" element={<Friends />}/>
+					<Route path="/notifications" element={<Notifications />}/>
+				</Routes>
+			</Router>
 		</ThemeProvider>
 	);
 }
