@@ -29,7 +29,18 @@ const useStyles = makeStyles({
 	}
 })
 
-function MediaCard() {
+
+/**
+ * 
+ * @param props.name: name of media
+ * @param props.summary: summary of the media
+ * @param props.tags: list of media tags
+ * @param props.genres: list of media genres
+ * @param props.recReview: the recommender's review
+ * @param props.recRating: the recommender's rating
+ * @param props.comRating: The community rating
+ */
+function MediaCard(props) {
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState(false);
 
@@ -52,33 +63,27 @@ function MediaCard() {
 							            style={{fontSize: "larger", fontWeight: 500}}
 							            color="secondary"
 							            gutterBottom>
-								Boku No Hero Academia
+								{}
 							</Typography>
 							<Typography color="secondary" style={{padding: "0px 5px"}} gutterBottom>&#183;</Typography>
 							<Typography variant="h5"
 							            style={{fontSize: "small", fontWeight: 500}}
 							            color="secondary"
 							            gutterBottom>
-								anime tv show
+								{props.tags}
 							</Typography>
 						</Grid>
 						<Typography variant="p" style={{fontSize: "smaller"}} color="secondary">
-							What would the world be like if 80 percent of the population
-							manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would
-							be battling it out everywhere! Becoming a hero would mean learning to use your power, but
-							where would you go to study? U.A. High's Hero Program of course! But what would you do if
-							you were one of the 20 percent who were born Quirkless?</Typography>
+							{props.summary}
+						</Typography>
 						<Grid container spacing={1} style={{marginTop: "10px"}}>
-							<Grid item>
-								<Paper elevation={0} className={classes.genrePill}>
-									action
-								</Paper>
-							</Grid>
-							<Grid item>
-								<Paper elevation={0} className={classes.genrePill}>
-									drama
-								</Paper>
-							</Grid>
+							{props.genres.map((genre) => 
+								<Grid item>
+									<Paper elevation={0} className={classes.genrePill}>
+										{genre}
+									</Paper>
+								</Grid>
+							)}
 						</Grid>
 						<Collapse in={expanded} timeout={"auto"} unmountOnExit style={{marginTop: "50px"}}>
 							<Typography style={{fontSize: "medium", fontWeight: 500}} color="secondary"
@@ -86,11 +91,7 @@ function MediaCard() {
 								recommender's review
 							</Typography>
 							<Typography variant="p" style={{fontSize: "smaller"}} color="secondary" gutterBottom>
-								Middle school student Izuku Midoriya wants to be a hero more than anything, but he
-								hasn't got an ounce of power in him. With no chance of ever getting into the prestigious
-								U.A. High School for budding heroes, his life is looking more and more like a dead end.
-								Then an encounter with All Might, the greatest hero of them all gives him a chance to
-								change his destiny…
+								{props.recReview}
 							</Typography>
 						</Collapse>
 					</Grid>
@@ -100,7 +101,7 @@ function MediaCard() {
 							recommender's<br/>rating
 						</Typography>
 						<Typography
-							style={{fontSize: "xxx-large", fontWeight: 700, color: "#00BFA5"}}>6.9</Typography>
+							style={{fontSize: "xxx-large", fontWeight: 700, color: "#00BFA5"}}>{props.recRating}</Typography>
 					</Grid>
 					<Grid item style={{textAlign: "center", marginTop: "10px"}}>
 						<Typography style={{fontSize: "smaller", fontWeight: 500}}
@@ -108,7 +109,7 @@ function MediaCard() {
 							community<br/>rating
 						</Typography>
 						<Typography
-							style={{fontSize: "xxx-large", fontWeight: 700, color: "#FF9800"}}>4.2</Typography>
+							style={{fontSize: "xxx-large", fontWeight: 700, color: "#FF9800"}}>{props.comRating}</Typography>
 					</Grid>
 					<Grid item justify="flex-end">
 						<CardActions>
