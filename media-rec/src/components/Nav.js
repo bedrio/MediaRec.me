@@ -53,8 +53,6 @@ const Nav = ({ children }) => {
                     MediaRec
                 </DrawerHeader>
                 
-                <Divider />
-
                 <List>
                     <Link style={{ textDecoration: 'none', color:"#CBE0F2" }} to="/">
                         <ListItem button key="MediaList">
