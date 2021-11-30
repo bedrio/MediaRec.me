@@ -1,6 +1,4 @@
-# [MediaRec.me](https://github.com/bedr2341/MediaRec.m) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MediaRec.me/LICENSE.md) 
-
-Change to whatever license is used(MIT is placeholder for now)
+# [MediaRec.me](https://github.com/bedr2341/MediaRec.m) &middot; [![GitHub license](https://img.shields.io/badge/license-Custom-blue.svg)](https://github.com/MediaRec.me/LICENSE.md) 
 
 Recommend anime, movies, music and more!
 
@@ -82,7 +80,7 @@ React is a JavaScript library for building user interfaces.
 
 ### License
 
-MediaRec.me is [MIT licensed](./LICENSE). (maybe not sure which will be used yet)
+MediaRec.me is [Custom licensed](./LICENSE). 
 
 
 ### Private Policy
