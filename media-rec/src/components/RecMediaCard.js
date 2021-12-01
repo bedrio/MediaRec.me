@@ -14,10 +14,12 @@ const useStyles = makeStyles({
  * @param props.name: name of media
  * @param props.summary: summary of the media
  * @param props.tags: list of media tags
+ * @param props.recReview: the recommender's review
+ * @param props.recRating: the recommender's rating
  * @param props.comRating: The community rating
  * @param props.category: What tab the media is in
  */
-function MediaCard(props) {
+function RecMediaCard(props) {
 	const classes = useStyles();
 
 	return (
@@ -45,6 +47,23 @@ function MediaCard(props) {
 						<Typography variant="p" style={{fontSize: "smaller"}} color="secondary">
 							{props.summary}
 						</Typography>
+						<Box style={{marginTop: "50px"}}>
+							<Typography style={{fontSize: "medium", fontWeight: 500}} color="secondary"
+							            gutterBottom>
+								recommender's review
+							</Typography>
+							<Typography variant="p" style={{fontSize: "smaller"}} color="secondary" gutterBottom>
+								{props.recReview}
+							</Typography>
+						</Box>
+					</Grid>
+					<Grid item style={{textAlign: "center", marginTop: "10px"}}>
+						<Typography style={{fontSize: "smaller", fontWeight: 500}}
+						            color="secondary">
+							recommender's<br/>rating
+						</Typography>
+						<Typography
+							style={{fontSize: "xxx-large", fontWeight: 700, color: "#00BFA5"}}>{props.recRating}</Typography>
 					</Grid>
 					<Grid item style={{textAlign: "center", marginTop: "10px"}}>
 						<Typography style={{fontSize: "smaller", fontWeight: 500}}
@@ -54,12 +73,11 @@ function MediaCard(props) {
 						<Typography
 							style={{fontSize: "xxx-large", fontWeight: 700, color: "#FF9800"}}>{props.comRating}</Typography>
 					</Grid>
-					<Grid item justify="flex-end">
-					</Grid>
+					<Grid item justify="flex-end"></Grid>
 				</Grid>
 			</Card>
 		</div>
 	);
 }
 
-export default MediaCard;
+export default RecMediaCard;
