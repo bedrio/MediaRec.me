@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MediaCard from '../components/MediaCard';
 import RecMediaCard from '../components/RecMediaCard';
-import Button from '@mui/material/Button';
 import FormDialog from "../components/FormDialog";
 
 function TabPanel(props) {
@@ -30,6 +29,11 @@ function TabPanel(props) {
   
 function WatchList() {
     const [value, setValue] = useState(0);
+
+    /*
+     *  TODO: This has the default starting media
+     *  Add a query to get the user's created media and put it inside this useState 
+     */
     const [mediaList, setMediaList] = useState([
       {
         name: "Hero Academy",
@@ -60,14 +64,16 @@ function WatchList() {
       }
     ]);
 
-    const addNewMedia = (name, summary, tags, recReview, recRating, comRating) => {
+    // TODO add query write here
+    const addNewMedia = (values, category) => {
       let newMedia = {
-        name: name,
-        summary: summary,
-        tags: tags,
-        recReview: recReview,
-        recRating: recRating,
-        comRating: comRating
+        name: values.name,
+        summary: values.summary,
+        tags: values.tags.split(),
+        recReview: values.recReview,
+        recRating: values.recRating,
+        comRating: values.comRating,
+        category: category
       }
 
       setMediaList([...mediaList, newMedia])
@@ -93,10 +99,12 @@ function WatchList() {
             </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
+              {/* What this basically does is: if medialist exists, then map every media that has the category current */}
               {mediaList ? mediaList.map((media) => {
                 return <>
                 {media.category === "Current" ? 
                   <Box marginBottom="25px">
+                  {/* if recReview is an empty string, then it will choose a normal mediaCard, otherwise, it chooses a recMediaCard */}
                   {media.recReview === "" ? 
                     <MediaCard
                       name={media.name}
@@ -181,20 +189,7 @@ function WatchList() {
             </TabPanel>
         </Box>
 
-        <FormDialog></FormDialog>
-
-        {/* <Button variant="contained" onClick={() => {
-          addNewMedia(
-            "new",
-            "this is a new media added by a button",
-            ["anime", "book"],
-            "",
-            4.2,
-            6.9
-          )
-        }}>
-          Add Media
-        </Button> */}
+        <FormDialog addNewMedia={addNewMedia}/>
     </>
     );
 }
