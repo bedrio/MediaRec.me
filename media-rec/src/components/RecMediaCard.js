@@ -210,7 +210,7 @@ function RecMediaCard(props) {
 				</DialogContent>
 				<DialogActions>
 				<Button color="error" onClick={() => {
-					props.deleteMedia(props.showID);
+					props.deleteMedia(props.showID, props.category);
 					handleClose();
 				}}>
 					Delete
