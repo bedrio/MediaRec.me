@@ -1,0 +1,281 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.3
+-- Dumped by pg_dump version 13.4
+
+-- Started on 2021-12-02 23:54:10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 203 (class 1259 OID 16493)
+-- Name: friend; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.friend (
+    email text NOT NULL,
+    show_id integer NOT NULL,
+    notification_id integer NOT NULL
+);
+
+
+ALTER TABLE public.friend OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16485)
+-- Name: notification; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.notification (
+    notification_id integer NOT NULL,
+    title text NOT NULL,
+    recommendation text NOT NULL,
+    recommender text NOT NULL,
+    status text NOT NULL,
+    email text NOT NULL
+);
+
+
+ALTER TABLE public.notification OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 16516)
+-- Name: rates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.rates (
+    email text NOT NULL,
+    show_id integer NOT NULL
+);
+
+
+ALTER TABLE public.rates OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16472)
+-- Name: recommendation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.recommendation (
+    show_id integer NOT NULL,
+    title text NOT NULL,
+    description text NOT NULL,
+    email text NOT NULL,
+    recommender_rating integer NOT NULL,
+    community_rating integer NOT NULL,
+    recommender_review text NOT NULL,
+    category text NOT NULL,
+    tags text[] NOT NULL
+);
+
+
+ALTER TABLE public.recommendation OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16464)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    email text NOT NULL,
+    name text NOT NULL,
+    profile_pic text NOT NULL,
+    friends text[] NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 3875 (class 0 OID 16493)
+-- Dependencies: 203
+-- Data for Name: friend; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.friend (email, show_id, notification_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3874 (class 0 OID 16485)
+-- Dependencies: 202
+-- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.notification (notification_id, title, recommendation, recommender, status, email) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3876 (class 0 OID 16516)
+-- Dependencies: 204
+-- Data for Name: rates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.rates (email, show_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3873 (class 0 OID 16472)
+-- Dependencies: 201
+-- Data for Name: recommendation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recommendation (show_id, title, description, email, recommender_rating, community_rating, recommender_review, category, tags) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3872 (class 0 OID 16464)
+-- Dependencies: 200
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (email, name, profile_pic, friends) FROM stdin;
+jjohnson@mail.com	Jim\nJohnson	default.jpg	{"John Doe"}
+j@mail.com	Jill	default.jpg	{"Jim Johnson"}
+x@x.com	Ninad	default.jpg	{""}
+x@y.com	x	default.jpg	{""}
+		default.jpg	{""}
+x@z.com	a	default.jpg	{""}
+x@a.com	z	default.jpg	{""}
+x@b.com	z	default.jpg	{""}
+x@c.com	z	default.jpg	{""}
+x@d.com	z	default.jpg	{""}
+x@e.com	z	default.jpg	{""}
+z@b.com	a	default.jpg	{""}
+s@s.com	s	default.jpg	{""}
+s@a.com	s	default.jpg	{""}
+s@b.com	s	default.jpg	{""}
+s@aa.com	s	default.jpg	{""}
+x@xx.com	x	default.jpg	{""}
+a@a.com	dcvfsd	default.jpg	{""}
+a@c.com	dcvfsd	default.jpg	{""}
+test@x.com	Ninad Kulkarni	default.jpg	{""}
+\.
+
+
+--
+-- TOC entry 3735 (class 2606 OID 16500)
+-- Name: friend friend_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friend
+    ADD CONSTRAINT friend_pkey PRIMARY KEY (notification_id);
+
+
+--
+-- TOC entry 3733 (class 2606 OID 16492)
+-- Name: notification notification_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.notification
+    ADD CONSTRAINT notification_pkey PRIMARY KEY (notification_id);
+
+
+--
+-- TOC entry 3731 (class 2606 OID 16479)
+-- Name: recommendation recommendation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recommendation
+    ADD CONSTRAINT recommendation_pkey PRIMARY KEY (show_id);
+
+
+--
+-- TOC entry 3729 (class 2606 OID 16471)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (email);
+
+
+--
+-- TOC entry 3737 (class 2606 OID 16501)
+-- Name: friend friend_email_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friend
+    ADD CONSTRAINT friend_email_fkey FOREIGN KEY (email) REFERENCES public.users(email) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3739 (class 2606 OID 16511)
+-- Name: friend friend_notification_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friend
+    ADD CONSTRAINT friend_notification_id_fkey FOREIGN KEY (notification_id) REFERENCES public.notification(notification_id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3738 (class 2606 OID 16506)
+-- Name: friend friend_show_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friend
+    ADD CONSTRAINT friend_show_id_fkey FOREIGN KEY (show_id) REFERENCES public.recommendation(show_id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3740 (class 2606 OID 16522)
+-- Name: rates rates_email_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rates
+    ADD CONSTRAINT rates_email_fkey FOREIGN KEY (email) REFERENCES public.users(email) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3741 (class 2606 OID 16527)
+-- Name: rates rates_show_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rates
+    ADD CONSTRAINT rates_show_id_fkey FOREIGN KEY (show_id) REFERENCES public.recommendation(show_id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3736 (class 2606 OID 16480)
+-- Name: recommendation recommendation_email_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recommendation
+    ADD CONSTRAINT recommendation_email_fkey FOREIGN KEY (email) REFERENCES public.users(email) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3882 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM rdsadmin;
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2021-12-02 23:54:18
+
+--
+-- PostgreSQL database dump complete
+--
+
