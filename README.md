@@ -2,67 +2,9 @@
 
 Recommend anime, movies, music and more!
 
+### User Manual and Setup
 
-## Setup
-Follow the guides below for each of the following 
-
-### [Node.js](https://nodejs.org/en/)
-
-Open a new terminal. Type the following and hit enter:
-
-```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash```
-
-Close your terminal, then open a new one and type this:
-
-```nvm ls```
-
-You will see something like this:
-
-```system
-iojs -> N/A (default)
-node -> stable (-> N/A) (default)
-unstable -> N/A (default)
-nvm_list_aliases:36: no matches found: /Users/adeelimran/.nvm/alias/lts/*
-```
-
-Next in your terminal type:
-
-```nvm install 12.18.1```
-
-Once it is installed, it is ready to be used. To use this version, just type this in your terminal:
-
-```nvm use 12.18.1```
-
-Now that it is installed let's check it by doing the following:
-
-```node --v```
-
-This will output "v12.18.1" (which is the NodeJS version you just installed)
-
-
-To uninstall Node use 
->rm -rf $NVM_DIR ~/.npm ~/.bower
-
-
-
-
-##### For MAC OS(requires [homebrew](https://brew.sh/)):
-```brew install node```
-
-
-### [React](https://reactjs.org/) 
-
-React is a JavaScript library for building user interfaces.
-
-##### Installation
-
-```npm install``` to install all the dependencies, React and React Native among others.
-
-```npm run build``` to build the project (at least the first time)
-
-```npm run serve-web``` to preview in the browser at http://localhost:8000
-
-```npm start``` try if serve-web does not work
+[Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
 
 
 ### Screenshots of Website
