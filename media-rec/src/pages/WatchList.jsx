@@ -34,33 +34,42 @@ function WatchList() {
      *  TODO: This has the default starting media
      *  Add a query to get the user's created media and put it inside this useState 
      */
+  
+    // I need to converts tags to string to avoid some errors
+    // queryResult.map((element) => (
+    //     element.tags = element.tags.join(" ")
+    // ))
+
     const [mediaList, setMediaList] = useState([
       {
         name: "Hero Academy",
         summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
-        tags: ["anime", "tv", "show"],
+        tags: "anime tv",
         recReview: "Middle school student Izuku Midoriya wants to be a hero more than anything, but he hasn't got an ounce of power in him. With no chance of ever getting into the prestigious U.A. High School for budding heroes, his life is looking more and more like a dead end. Then an encounter with All Might, the greatest hero of them all gives him a chance to change his destiny…",
         recRating: 6.9,
         comRating: 4.2,
-        category: "Current"
+        category: "Current",
+        showID: 0
       },
       {
         name: "Hero Academy",
         summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
-        tags: ["anime", "tv", "show"],
+        tags: "anime tv",
         recReview: "",
         recRating: 10,
         comRating: 5,
-        category: "Next"
+        category: "Next",
+        showID: 1
       },
       {
         name: "Your Mom",
         summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
-        tags: ["anime", "tv", "show"],
+        tags: "anime tv",
         recReview: "Middle school student Izuku Midoriya wants to be a hero more than anything, but he hasn't got an ounce of power in him. With no chance of ever getting into the prestigious U.A. High School for budding heroes, his life is looking more and more like a dead end. Then an encounter with All Might, the greatest hero of them all gives him a chance to change his destiny…",
         recRating: 3.5,
         comRating: 2.8,
-        category: "Planning"
+        category: "Planning",
+        showID: 2
       }
     ]);
 
@@ -69,14 +78,47 @@ function WatchList() {
       let newMedia = {
         name: values.name,
         summary: values.summary,
-        tags: values.tags.split(),
+        tags: values.tags,
         recReview: values.recReview,
         recRating: values.recRating,
         comRating: values.comRating,
-        category: category
+        category: category,
+        showID: 3 //TODO add this Ninad
       }
 
+      //TODO for the query, convert the tags to an array by doing
+      // arrayTags = [values.tags]
+
+    //   INSERT INTO RECOMMENDATION (show_id, title, description, email, recommender_rating, community_rating, recommender_review, category, tags) 
+    // VALUES ({show_id}, {values.name},{values.summary}, {email},{values.recRating},{values.comRating},{values.recReview},{category},{arrayTags});
+
       setMediaList([...mediaList, newMedia])
+    }
+
+    const updateMedia = (values, category, showID) => {
+      let newMedia = {
+        name: values.name,
+        summary: values.summary,
+        tags: values.tags,
+        recReview: values.recReview,
+        recRating: values.recRating,
+        comRating: values.comRating,
+        category: category,
+        showID: showID
+      }
+
+      //UPDATE RECOMMENDATION SET show_id={showID}, title={values.name}, description={values.summary}, recommender_rating={values.recRating}, community_rating={values.comRating}, recommender_review={values.recRating}, category={category}, tags={arrayTags} where email={userEmail};
+
+      setMediaList((prevMediaList) =>
+        prevMediaList.map((media) => {
+          return media.showID === newMedia.showID ? newMedia : media;
+        }),
+      );
+    }
+
+    const deleteMedia = (showID) => {
+      //query DELETE from RECOMMENDATION WHERE show_id={showID};
+      setMediaList(mediaList.filter(item => item.showID !== showID))
     }
 
     const handleChange = (event, newValue) => {
@@ -112,6 +154,9 @@ function WatchList() {
                       tags={media.tags}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                     />
                     :
                     <RecMediaCard
@@ -122,6 +167,9 @@ function WatchList() {
                       recRating={media.recRating}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                       />      
                     }
                   </Box>
@@ -141,6 +189,9 @@ function WatchList() {
                       tags={media.tags}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                     />
                     :
                     <RecMediaCard
@@ -151,6 +202,9 @@ function WatchList() {
                       recRating={media.recRating}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                       />      
                     }
                   </Box>
@@ -170,6 +224,9 @@ function WatchList() {
                       tags={media.tags}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                     />
                     :
                     <RecMediaCard
@@ -180,6 +237,9 @@ function WatchList() {
                       recRating={media.recRating}
                       comRating={media.comRating}
                       category={media.category}
+                      showID={media.showID}
+                      updateMedia={updateMedia}
+                      deleteMedia={deleteMedia}
                       />      
                     }
                   </Box>
