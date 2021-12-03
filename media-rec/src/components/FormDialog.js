@@ -52,8 +52,6 @@ const FormDialog = (props) => {
     }
     
     setErrors({...temp})
-    console.log(fieldValues)
-    console.log(values)
     if (fieldValues == values)
         return Object.values(temp).every(x => x == "")
   }
