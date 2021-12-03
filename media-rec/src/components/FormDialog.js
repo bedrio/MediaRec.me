@@ -10,11 +10,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 /**
  * @param props.addNewMedia: the function to call when the form is completed
+ * @param props.currentNumber: the number of media cards in current
+ * @param props.nextNumber: the number of media cards in next
+ * @param props.currentLimit: the maximum number of current media cards
+ * @param props.nextLimit: the maximum number of next media cards
  */
 const FormDialog = (props) => {
   const [open, setOpen] = useState(false);
 
-  const [x, setX] = useState(1);
+  const [helperText, setHelperText] = useState("");
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,6 +43,7 @@ const FormDialog = (props) => {
     "summary": false,
     "tags": false,
     "comRating": false,
+    "category": false
   });
 
   const validate = (fieldValues = values) => {
@@ -51,6 +56,17 @@ const FormDialog = (props) => {
         temp.tags = !(fieldValues.tags.length > 0)
     if ('comRating' in fieldValues){
         temp.comRating = !(fieldValues.comRating.toString().length > 0)
+    }
+
+    if (category === "Current" && props.currentNumber == props.currentLimit) {
+      setHelperText("Category is Full!")
+      temp.category = true
+    } else if (category === "Next" && props.nextNumber == props.nextLimit) {
+      setHelperText("Category is Full!")
+      temp.category = true
+    } else {
+      setHelperText("")
+      temp.category = false
     }
     
     setErrors({...temp})
@@ -185,6 +201,8 @@ const FormDialog = (props) => {
               value={category}
               onChange={handleCategory}
               variant="standard"
+              helperText={helperText}
+              error={errors.category}
             >
               {categories.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -197,9 +215,8 @@ const FormDialog = (props) => {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={(e) => {
-            if(validate() && x < 3) {
+            if(validate()) {
               props.addNewMedia(values, category)
-              setX(x + 1);
               handleClose()
               resetForm()
             }

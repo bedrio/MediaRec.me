@@ -10,12 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 /**
- * @param props.currentNumber
- * @param props.nextNumber
- * @param props.planningNumber
- * @param props.currentLimit
- * @param props.nextLimit
- * @param props.planningLimit
+ * @param props.currentNumber: the number of media cards in current
+ * @param props.nextNumber: the number of media cards in next
+ * @param props.currentLimit: the maximum number of current media cards
+ * @param props.nextLimit: the maximum number of next media cards
  * @param props.updateNumbers
  */
 const SettingsDialog = (props) => {
@@ -32,28 +30,23 @@ const SettingsDialog = (props) => {
   const initialValues = {
     "currentLimit": props.currentLimit,
     "nextLimit": props.nextLimit,
-    "planningLimit": props.planningLimit,
   };
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({
     "currentLimit": false,
     "nextLimit": false,
-    "planningLimit": false,
   });
 
   //TODO for Beder check limit and current
   const validate = (fieldValues = values) => {
     let temp = { ...errors }
     if ('currentLimit' in fieldValues){
-        temp.currentLimit = !(fieldValues.currentLimit.toString().length > 0)
+        temp.currentLimit = fieldValues.currentLimit.toString() === "NaN"
     }
     if ('nextLimit' in fieldValues){
-        temp.nextLimit = !(fieldValues.nextLimit.toString().length > 0)
+        temp.nextLimit = fieldValues.nextLimit.toString() === "NaN"
     }
-    if ('planningLimit' in fieldValues){
-        temp.planningLimit = !(fieldValues.planningLimit.toString().length > 0)
-    }
-    
+
     setErrors({...temp})
     if (fieldValues == values)
         return Object.values(temp).every(x => x == "")
@@ -63,8 +56,16 @@ const SettingsDialog = (props) => {
     const id = e.target.id
     let value = parseInt(e.target.valueAsNumber)
 
-    //value of rating must be between 0 and 10
-    if(e.target.valueAsNumber < 0) {
+    //value of limit must be one or more
+    if(e.target.valueAsNumber < 1) {
+      value = values[e.target.id]
+    }
+
+    //can't exceed the number of current cards
+    if(id === "currentLimit" && e.target.valueAsNumber < props.currentNumber) {
+      value = values[e.target.id]
+    }
+    if(id === "nextLimit" && e.target.valueAsNumber < props.nextNumber) {
       value = values[e.target.id]
     }
 
@@ -115,19 +116,6 @@ const SettingsDialog = (props) => {
                 onChange={handleInputChange}
                 id="nextLimit"
                 label="Next Limit"
-                type="number"
-                variant="standard"
-              />
-            </div>
-            <div>
-              <TextField
-                margin="none"
-                required
-                value={values.planningLimit}
-                error={errors.planningLimit}
-                onChange={handleInputChange}
-                id="planningLimit"
-                label="Planning Limit"
                 type="number"
                 variant="standard"
               />
