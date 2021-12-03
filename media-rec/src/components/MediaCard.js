@@ -239,11 +239,12 @@ function MediaCard(props) {
 							            gutterBottom>
 								{props.name}
 							</Typography>
-							<Typography color="secondary" style={{padding: "0px 5px"}} gutterBottom>&#183;</Typography>
+							{/*<Typography color="secondary" style={{padding: "0px 5px"}} gutterBottom>&#183;</Typography>*/}
 							<Typography variant="h5"
 							            style={{fontSize: "small", fontWeight: 500}}
 							            color="secondary"
 							            gutterBottom>
+								&#183;
 								{props.tags}
 							</Typography>
 						</Grid>

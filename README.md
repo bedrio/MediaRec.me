@@ -5,7 +5,7 @@ Recommend anime, movies, music and more!
 ### Links for Graders and Instructor
 
 * [User Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
-* [Link to 5min Video Demostration]()
+* [Link to 5min Video Demostration](https://youtu.be/h5UbNDP7w2k)
 * [Database Dump](https://github.com/bedr2341/MediaRec.me/blob/master/Database/Database-Dump.txt)
 * [Project Phase 1 Report](https://github.com/bedr2341/MediaRec.me/wiki/Phase-1-Project-Report)
 * [Project Phase 2 Report](https://github.com/bedr2341/MediaRec.me/wiki/Phase-2-Project-Report)

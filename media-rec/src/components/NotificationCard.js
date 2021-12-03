@@ -1,7 +1,8 @@
 import { React, useState } from 'react'
-import {Card, Grid, makeStyles, Typography} from "@material-ui/core";
+import {Button, Card, Grid, IconButton, makeStyles, Typography} from "@material-ui/core";
 import {theme} from "../themes/AppTheme";
 import Box from '@mui/material/Box';
+import CheckIcon from '@mui/icons-material/Check';
 
 const useStyles = makeStyles({
 	root: {
@@ -14,7 +15,7 @@ function RecMediaCard(props) {
 
 	return (
         <div className={classes.root}>
-            <Card style={{background: "#1B1E28", padding: theme.spacing(2), borderRadius: "20px"}}>
+            <Card style={{background: "#1B1E28", padding: theme.spacing(2), borderRadius: "20px"}} id="bruh">
                 <Grid container spacing={3} justify="space-between">
                     <Grid item xl={8} style={{marginTop: "10px"}}>
                         <Grid container alignItems="center">
@@ -64,6 +65,11 @@ function RecMediaCard(props) {
                     <Grid item justify="flex-end"></Grid>
                 </Grid>
             </Card>
+            <IconButton onClick={() => {
+                document.getElementById('bruh').style.display = 'none';
+            }}>
+                <CheckIcon/>
+            </IconButton>
         </div>
 	);
 }
