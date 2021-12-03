@@ -13,8 +13,7 @@ Recommend anime, movies, music and more!
 ### Screenshots of Website
 
 
-![image-login](https://user-images.githubusercontent.com/43308680/144004921-476f534b-72c7-462f-bfd8-2c0f2ddf92f9.png)
-
+![image-login11](https://user-images.githubusercontent.com/43308680/144557990-4e363cab-c9b4-4043-9687-6ebc5380cdc2.png)
 
 ![image-notif](https://user-images.githubusercontent.com/43308680/144004942-7427353b-d3cc-48f5-a7e6-a93ceae3a4b6.png)
 
