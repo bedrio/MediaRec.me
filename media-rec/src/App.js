@@ -7,27 +7,32 @@ import Notifications from "./pages/Notifications";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Authentication from "./pages/Authentication";
+import { useCookies } from "react-cookie";
+
 
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <Authentication />
-    </ThemeProvider>
-  );
+	const [cookies, setCookie] = useCookies(["user"]);
+
+	return (
+		<ThemeProvider theme={theme}>
+			<AppNavigation />
+		</ThemeProvider>
+	);
 }
 
 function AppNavigation() {
-  return (
-    <Router>
-      <Nav>
-        <Routes>
-          <Route path="/" element={<WatchList />} />
-          <Route path="/friends" element={<Friends />} />
-          <Route path="/notifications" element={<Notifications />} />
-        </Routes>
-      </Nav>
-    </Router>
-  );
+	return (
+		<Router>
+			<Nav>
+				<Routes>
+					<Route path="/" element={<WatchList />} />
+					<Route path="/auth" element={<Authentication />} />
+					<Route path="/friends" element={<Friends />} />
+					<Route path="/notifications" element={<Notifications />} />
+				</Routes>
+			</Nav>
+		</Router>
+	);
 }
 
 export default App;
