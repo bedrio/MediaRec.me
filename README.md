@@ -6,11 +6,12 @@ Recommend anime, movies, music and more!
 
 * [User Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
 * [Link to 5min Video Demostration]()
+* [Database Dump](https://github.com/bedr2341/MediaRec.me/blob/master/Database/Database-Dump.txt)
 * [Project Phase 1 Report]()
 * [Project Phase 2 Report]()
 
 ### Screenshots of Website
->(TODO:replace with real website screenshots)
+
 
 ![image-login](https://user-images.githubusercontent.com/43308680/144004921-476f534b-72c7-462f-bfd8-2c0f2ddf92f9.png)
 
