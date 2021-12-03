@@ -2,7 +2,7 @@
 
 Recommend anime, movies, music and more!
 
-### Links for Grader's and Instructor
+### Links for Graders and Instructor
 
 * [User Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
 * [Link to 5min Video Demostration]()
