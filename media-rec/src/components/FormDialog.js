@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
  */
 const FormDialog = (props) => {
   const [open, setOpen] = useState(false);
+
+  const [x, setX] = useState(1);
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -195,8 +197,9 @@ const FormDialog = (props) => {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={(e) => {
-            if(validate()) {
+            if(validate() && x < 3) {
               props.addNewMedia(values, category)
+              setX(x + 1);
               handleClose()
               resetForm()
             }

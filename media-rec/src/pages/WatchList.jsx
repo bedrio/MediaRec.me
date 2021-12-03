@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import MediaCard from '../components/MediaCard';
 import RecMediaCard from '../components/RecMediaCard';
 import FormDialog from "../components/FormDialog";
+import SettingsDialog from '../components/SettingsDialog';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -29,6 +30,19 @@ function TabPanel(props) {
   
 function WatchList() {
     const [value, setValue] = useState(0);
+    const [currentNumber, setCurrentNumber] = useState(0);
+    const [nextNumber, setNextNumber] = useState(0);
+    const [planningNumber, setPlanningNumber] = useState(0);
+
+    const [currentLimit, setCurrentLimit] = useState(3);
+    const [nextLimit, setNextLimit] = useState(5);
+    const [planningLimit, setPlanningLimit] = useState(10);
+
+    const updateNumbers = (values) => {
+      setCurrentNumber(values.currentLimit);
+      setNextNumber(values.nextLimit);
+      setPlanningNumber(values.planningLimit);
+    }
 
     /*
      *  TODO: This has the default starting media
@@ -46,28 +60,28 @@ function WatchList() {
         summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
         tags: "anime tv",
         recReview: "Middle school student Izuku Midoriya wants to be a hero more than anything, but he hasn't got an ounce of power in him. With no chance of ever getting into the prestigious U.A. High School for budding heroes, his life is looking more and more like a dead end. Then an encounter with All Might, the greatest hero of them all gives him a chance to change his destiny…",
-        recRating: 6.9,
-        comRating: 4.2,
+        recRating: 8,
+        comRating: 7,
         category: "Current",
         showID: 0
       },
       {
-        name: "Hero Academy",
-        summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
+        name: "Fullmetal Alchemist: Brotherhood",
+        summary: "After a horrific alchemy experiment goes wrong in the Elric household, brothers Edward and Alphonse are left in a catastrophic new reality. Ignoring the alchemical principle banning human transmutation, the boys attempted to bring their recently deceased mother back to life. Instead, they suffered brutal personal loss: Alphonse's body disintegrated while Edward lost a leg and then sacrificed an arm to keep Alphonse's soul in the physical realm by binding it to a hulking suit of armor.",
         tags: "anime tv",
         recReview: "",
         recRating: 10,
-        comRating: 5,
+        comRating: 9,
         category: "Next",
         showID: 1
       },
       {
-        name: "Your Mom",
-        summary: "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless?",
+        name: "Your Name",
+        summary: "Mitsuha Miyamizu, a high school girl, yearns to live the life of a boy in the bustling city of Tokyo—a dream that stands in stark contrast to her present life in the countryside. Meanwhile in the city, Taki Tachibana lives a busy life as a high school student while juggling his part-time job and hopes for a future in architecture.",
         tags: "anime tv",
-        recReview: "Middle school student Izuku Midoriya wants to be a hero more than anything, but he hasn't got an ounce of power in him. With no chance of ever getting into the prestigious U.A. High School for budding heroes, his life is looking more and more like a dead end. Then an encounter with All Might, the greatest hero of them all gives him a chance to change his destiny…",
-        recRating: 3.5,
-        comRating: 2.8,
+        recReview: "Very high quality animation. Pretty funny and has a nice romance",
+        recRating: 8,
+        comRating: 9,
         category: "Planning",
         showID: 2
       }
@@ -107,6 +121,14 @@ function WatchList() {
         showID: showID
       }
 
+      if(category === "Current") {
+        setCurrentNumber(currentNumber + 1);
+      } else if(category === "Next") {
+        setNextNumber(nextNumber + 1);
+      } else if(category === "Planning") {
+        setPlanningNumber(planningNumber + 1);
+      }
+
       //UPDATE RECOMMENDATION SET show_id={showID}, title={values.name}, description={values.summary}, recommender_rating={values.recRating}, community_rating={values.comRating}, recommender_review={values.recRating}, category={category}, tags={arrayTags} where email={userEmail};
 
       setMediaList((prevMediaList) =>
@@ -116,7 +138,15 @@ function WatchList() {
       );
     }
 
-    const deleteMedia = (showID) => {
+    const deleteMedia = (showID, category) => {
+      if(category === "Current") {
+        setCurrentNumber(currentNumber - 1);
+      } else if(category === "Next") {
+        setNextNumber(nextNumber - 1);
+      } else if(category === "Planning") {
+        setPlanningNumber(planningNumber - 1);
+      }
+
       //query DELETE from RECOMMENDATION WHERE show_id={showID};
       setMediaList(mediaList.filter(item => item.showID !== showID))
     }
@@ -127,9 +157,17 @@ function WatchList() {
   
     return (
       <>
-        <Box>
+        <Box display="flex" justifyContent="space-between">
           <h1>Media List</h1>
-          {/* settings icon */}
+          <SettingsDialog
+            currentNumber={currentNumber}
+            nextNumber={nextNumber}
+            planningNumber={planningNumber}
+            currentLimit={currentLimit}
+            nextLimit={nextLimit}
+            planningLimit={planningLimit}
+            updateNumbers={updateNumbers}
+          />
         </Box>
 
         <Box sx={{ width: '100%' }}>
