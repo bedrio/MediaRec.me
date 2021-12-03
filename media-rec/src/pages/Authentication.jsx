@@ -1,6 +1,8 @@
-import { Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import React, { useState, useRef } from 'react'
-import pool from '../db';
+import "../themes/Auth.css";
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import {AccountCircle} from '@mui/icons-material';
+import { deepOrange } from '@mui/material/colors';
+import React, { useState, useRef } from 'react';
 
 function Authentication() {
 	const [newUserFormDisplay, setNewUserFormDisplay] = useState(true);
@@ -16,17 +18,42 @@ function Authentication() {
 	const [passwordError, setPasswordError] = useState(false);
 
 	function signup() {
-		// pool.query("SELECT * FROM USERS;");
+        // check 
+
+        fetch("http://localhost:3001/auth", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name, email})
+        })
+        .then(response => {
+            if (!response.ok) {
+                // error
+            }
+        })
+        .then(() => {
+            // navigate to main            
+        })
+        .catch(error => {
+
+        });
 	}
 
 	function login() {
-
+        // check if user with password exists
 	}
 
 	return (
-		<Container style={{ padding: "5%" }}>
-			<Grid container alignItems="center" spacing={5}>
-				<Grid item md={6}>
+		<Container style={{ height: "100vh" }}>
+			<Grid container alignItems={"center"} justifyContent={"center"} spacing={5} style={{paddingTop: "15%"}}>
+            <Grid item md={5}>
+					<Typography variant="h1" color="secondary" style={{ fontWeight: "700", fontSize: "xx-large" }} gutterBottom>
+						Welcome to MediaRec.me
+					</Typography>
+                    <Typography variant="p" color="secondary">
+                    Lorem ninja ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut ninja wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit ninja lobortis nisl ut aliquip ex ea commodo consequat.
+                    </Typography>
+				</Grid>
+				<Grid item md={7}>
 					<Paper style={{ backgroundColor: "#2F45C5", padding: 50, borderRadius: 25 }}>
 						<Typography variant="h2" color="secondary" style={{ fontWeight: "700", fontSize: "xx-large" }}>
 							{newUserFormDisplay ? "Sign Up" : "Log In"}
@@ -65,6 +92,10 @@ function Authentication() {
 												setPassword(event.target.value);
 											}
 										}} />
+
+                                    <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                                        A
+                                    </Avatar>
 								</>
 								:
 								<>
@@ -105,11 +136,6 @@ function Authentication() {
 							}
 						</Button>
 					</Paper>
-				</Grid>
-				<Grid item md={6}>
-					<Typography variant="h1" color="secondary" style={{ fontWeight: "700", fontSize: "xx-large" }}>
-						Welcome to MediaRec.me
-					</Typography>
 				</Grid>
 			</Grid>
 		</Container>
