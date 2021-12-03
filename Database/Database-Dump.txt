@@ -1,0 +1,43 @@
+CREATE TABLE users(
+email TEXT PRIMARY KEY NOT NULL,
+name TEXT NOT NULL,
+profile_pic TEXT NOT NULL,
+friends TEXT[] NOT NULL);
+
+CREATE TABLE recommendation(
+show_id INT PRIMARY KEY NOT NULL,
+title TEXT NOT NULL,
+description TEXT NOT NULL,
+email TEXT NOT NULL,
+recommender_rating INT NOT NULL,
+community_rating INT NOT NULL,
+recommender_review TEXT NOT NULL,
+category TEXT NOT NULL,
+FOREIGN KEY(email) REFERENCES users(email) ON DELETE SET NULL,
+tags TEXT[] NOT NULL);
+
+CREATE TABLE notification(
+notification_id INT PRIMARY KEY NOT NULL,
+title TEXT NOT NULL,
+recommendation TEXT NOT NULL,
+recommender TEXT NOT NULL,
+status TEXT NOT NULL,
+email TEXT NOT NULL);
+
+CREATE TABLE friend(
+email TEXT NOT NULL,
+show_id INT NOT NULL,
+notification_id INT PRIMARY KEY NOT NULL,
+FOREIGN KEY(email) REFERENCES users(email) ON DELETE SET NULL,
+FOREIGN KEY(show_id) REFERENCES recommendation(show_id) ON DELETE SET
+NULL,
+FOREIGN KEY(notification_id) REFERENCES notification(notification_id) ON DELETE
+SET NULL);
+
+CREATE TABLE rates(
+email TEXT NOT NULL,
+show_id INT PRIMARY KEY NOT NULL,
+FOREIGN KEY(email) REFERENCES users(email) ON DELETE SET NULL,
+FOREIGN KEY(show_id) REFERENCES recommendation(show_id) ON DELETE SET
+NULL);
+
