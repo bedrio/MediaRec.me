@@ -15,23 +15,17 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<AppNavigation />
+			<Router>
+				<Nav>
+					<Routes>
+						<Route path="/" element={<WatchList />} />
+						<Route path="/auth" element={<Authentication />} />
+						<Route path="/friends" element={<Friends />} />
+						<Route path="/notifications" element={<Notifications />} />
+					</Routes>
+				</Nav>
+			</Router>
 		</ThemeProvider>
-	);
-}
-
-function AppNavigation() {
-	return (
-		<Router>
-			<Nav>
-				<Routes>
-					<Route path="/" element={<WatchList />} />
-					<Route path="/auth" element={<Authentication />} />
-					<Route path="/friends" element={<Friends />} />
-					<Route path="/notifications" element={<Notifications />} />
-				</Routes>
-			</Nav>
-		</Router>
 	);
 }
 
