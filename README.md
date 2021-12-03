@@ -2,10 +2,10 @@
 
 Recommend anime, movies, music and more!
 
-### User Manual and Setup
+### Links for Grader's and Instructor
 
-[Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
-
+* [Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
+* [Link to 5min Video Demostration]()
 
 ### Screenshots of Website
 >(TODO:replace with real website screenshots)
