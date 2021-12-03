@@ -15,7 +15,6 @@ Recommend anime, movies, music and more!
 
 ![image-login](https://user-images.githubusercontent.com/43308680/144004921-476f534b-72c7-462f-bfd8-2c0f2ddf92f9.png)
 
-
 ![image-notif](https://user-images.githubusercontent.com/43308680/144004942-7427353b-d3cc-48f5-a7e6-a93ceae3a4b6.png)
 
 ![image-watchlist](https://user-images.githubusercontent.com/43308680/144004997-c00f42ed-9720-4dc6-a900-a25eb45017e0.png)
