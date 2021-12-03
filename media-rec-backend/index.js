@@ -8,7 +8,7 @@ app.use(express.json());
 const port = 3001
 const pool = require('./db');
 
-//
+// Check login info
 app.get('/auth', async(req, res) => {
 	try {
 		const users = await pool.query("SELECT * FROM USERS ;");
@@ -23,9 +23,9 @@ app.post('/auth', async(req, res) => {
 	try {
 		const {name, email} = req.body;
 		const newUser = await pool.query(`INSERT INTO USERS (email, name, profile_pic, friends) VALUES('${email}','${name}','default.jpg', ARRAY['']);`);
-		res.json(newUser.rows[0]);
+		res.json(newUser);
 	} catch (error) {
-		console.error(error);
+		res.json(error);
 	}
 });
   
