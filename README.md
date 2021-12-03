@@ -4,8 +4,10 @@ Recommend anime, movies, music and more!
 
 ### Links for Grader's and Instructor
 
-* [Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
+* [User Manual for MediaRec.me](https://github.com/bedr2341/MediaRec.me/wiki/User-Manual)
 * [Link to 5min Video Demostration]()
+* [Project Phase 1 Report]()
+* [Project Phase 2 Report]()
 
 ### Screenshots of Website
 >(TODO:replace with real website screenshots)
